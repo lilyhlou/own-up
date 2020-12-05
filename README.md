@@ -1,0 +1,31 @@
+# Rate Quote Coding Challenge for Own Up
+
+This project was created for [Own Up](ownup.com)'s coding challenge. The goal was to create a UI to show users (people looking for home loans) quotes from multiple lenders using data from Own Up's API based on a user's custom information. 
+
+(insert screenshot of app)
+### Technologies Used
+
+* [Dot Env](https://www.npmjs.com/package/dotenv) for hiding the API key in committed code
+* [Create React App](https://github.com/facebook/create-react-app/tree/master)
+* [Redux Thunk](https://github.com/reduxjs/redux-thunk)
+* Own Up's Rate Quote API
+
+### How to Run
+##### Downloading and opening the code
+1. Open terminal and run `git clone https://github.com/lilyhlou/own-up.git` in terminal or open with Github Desktop/download a zip file of the code.
+2. cd or open folder (own-up)
+3. Run `npm install` to download dependencies (make sure [npm and Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) are installed)
+4. Create an .env file in the root and add the line "REACT_APP_API_KEY= YOUR_API_KEY" (replace 'YOUR_API_KEY' with your API key)
+5. Run `npm start` in terminal
+6. Plug in values in text boxes (values for loan size and credit score must be numbers; credit score must be between 300 and 800). Click 'Quote Rates' to see a returned table of rates and lenders.
+
+##### Running the app locally 
+* `npm start` to run the app in development mode.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will reload if you make edits (note: terminate app with "control + c" and run `npm start` again if API key is updated in .env file).
+Press option + command + c and click the console tab of inspector to see errors or to inspect code.
+
+* `npm test` to run tests.
+
+* `npm run build` builds the app for production / deployment.
+
+ 
