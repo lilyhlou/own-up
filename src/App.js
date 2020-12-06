@@ -1,13 +1,10 @@
 import './App.css';
+import InputForm from './components/Input';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          This is the rate calculator.
-        </p>
-      </header>
+        <InputForm></InputForm>
     </div>
   );
 }

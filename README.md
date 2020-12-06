@@ -1,6 +1,6 @@
 # Rate Quote Coding Challenge for Own Up
 
-This project was created for [Own Up](ownup.com)'s coding challenge. The goal was to create a UI to show users (people looking for home loans) quotes from multiple lenders using data from Own Up's API based on a user's custom information. 
+This project was created for [Own Up](ownup.com)'s coding challenge. The goal was to create a UI to show users (people looking for home loans) quotes from multiple lenders using data from Own Up's API based on a user's custom information, such as loan amount and credit score. 
 
 (insert screenshot of app)
 ### Technologies Used

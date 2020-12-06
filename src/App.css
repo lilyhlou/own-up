@@ -1,4 +1,67 @@
-.App {
-  text-align: center;
+  .App {
+    text-align: center;
+  }
+  .input {
+    display: flex;
+    white-space:nowrap
+  }
+  .formBox {
+    min-width: 18vw;
+    margin-left: 2rem;
+    margin-right:10rem;
+  }
+  .dropdown-menu{
+    width: 100%;
+    text-align: center;
+}
+form {
+  margin-top: 10vh;
+}
+.button {
+  margin-right: 6vw;
+}
+.blackBackground {
+  background-color:#143f3d!important;
+  border-color: #143f3d!important;
+}
+body {
+  color: #143f3d;
 }
 
+@media only screen and (max-width: 1080px) {
+  #forMedScreen .justify-content-end.d-flex.button {
+    margin-right: 5rem;
+    justify-content: flex-end!important;
+  }
+
+  .formBox {
+    min-width: 18vw;
+    margin-left: 1vw;
+    margin-right:0rem;
+  }
+.form-inline label {
+  display: block
+
+}
+}
+
+@media only screen and (max-width: 800px) {
+  #forMedScreen .justify-content-end.d-flex {
+    justify-content: center!important;
+  }
+}
+
+@media only screen and (min-width: 1300px) {
+ 
+ 
+  .formBox {
+    min-width: 18vw;
+    margin-left: 1vw;
+    margin-right:18vw;
+  }
+  .btn {
+    margin-right: 12vw;
+  }
+
+
+}
