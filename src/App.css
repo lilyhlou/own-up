@@ -1,18 +1,18 @@
-  .App {
-    text-align: center;
-  }
-  .input {
-    display: flex;
-    white-space:nowrap
-  }
-  .formBox {
-    min-width: 18vw;
-    margin-left: 2rem;
-    margin-right:10rem;
-  }
-  .dropdown-menu{
-    width: 100%;
-    text-align: center;
+.App {
+  text-align: center;
+}
+.input {
+  display: flex;
+  white-space:nowrap
+}
+.formBox {
+  min-width: 18vw;
+  margin-left: 2rem;
+  margin-right:10rem;
+}
+.dropdown-menu{
+  width: 100%;
+  text-align: center;
 }
 form {
   margin-top: 10vh;
@@ -30,30 +30,46 @@ body {
 
 @media only screen and (max-width: 1080px) {
   #forMedScreen .justify-content-end.d-flex.button {
-    margin-right: 5rem;
-    justify-content: flex-end!important;
+    margin-right: 0rem;
   }
 
   .formBox {
-    min-width: 18vw;
+    min-width: 24vw;
     margin-left: 1vw;
     margin-right:0rem;
   }
 .form-inline label {
   display: block
-
 }
+.col-md {
+  padding-right: 10vw!important;
+}
+
 }
 
 @media only screen and (max-width: 800px) {
   #forMedScreen .justify-content-end.d-flex {
     justify-content: center!important;
   }
+  #forMedScreen .justify-content-end.d-flex.button {
+    margin-right: 0rem;
+  }
+  .form-row>.col {
+    padding-left: 0px;
+  }
+  .col-md {
+    padding-right: 0px!important;
+  }
+  .formBox {
+    margin-left: .5vw;
+    margin-right:0rem;
+  }
+
+
 }
 
 @media only screen and (min-width: 1300px) {
- 
- 
+
   .formBox {
     min-width: 18vw;
     margin-left: 1vw;
@@ -64,4 +80,11 @@ body {
   }
 
 
+}
+
+@media only screen and (max-width: 574px) {
+  .formBox {
+    margin-left: .5vw;
+    min-width: 45vw;
+  }
 }
