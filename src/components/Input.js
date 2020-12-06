@@ -2,29 +2,11 @@ import React, { Component, Fragment, useState, useEffect } from 'react';
 import '../App.css';
 import { Form, FormControl, Container, Row, Col, InputGroup, Button } from 'react-bootstrap';
 
+
 class InputForm extends Component {
-	constructor (props) {
-	  super(props)
-	  this.state = {
-		loan: "null",
-		property: "null",
-		credit: "null",
-		occupancy: "null",
-		submitted: false,
-		isLoading: false,
-	  }
-	}
-	handleClick() {
-		console.log("clicked");
-	}
-	filterchange = (event) => {
-	
-	}
-	componentWillMount() {
-	}
 	  render() {
 		return(
-			<Form onSubmit={this.handleClick()} id="forMedScreen">
+			<Form id="forMedScreen">
   				<Form.Row>
 					<Form.Group as={Col} md className="d-flex justify-content-end">     
 						<div className="form-inline">
@@ -73,14 +55,13 @@ class InputForm extends Component {
 							type="submit"
 							className="blackBackground"
 						>
-							{this.props.isLoading ? 'Loading…' : 'Quote Rates'}
-							
+							Quote Rates
 						</Button>
 					</Form.Group>
 				</Form.Row>
   			</Form>
 		);
-}
+	}
 }
 export default InputForm;
 

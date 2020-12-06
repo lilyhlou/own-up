@@ -44,7 +44,6 @@ body {
 .col-md {
   padding-right: 10vw!important;
 }
-
 }
 
 @media only screen and (max-width: 800px) {
@@ -64,12 +63,9 @@ body {
     margin-left: .5vw;
     margin-right:0rem;
   }
-
-
 }
 
 @media only screen and (min-width: 1300px) {
-
   .formBox {
     min-width: 18vw;
     margin-left: 1vw;
@@ -78,10 +74,7 @@ body {
   .btn {
     margin-right: 12vw;
   }
-
-
 }
-
 @media only screen and (max-width: 574px) {
   .formBox {
     margin-left: .5vw;
