@@ -69,10 +69,10 @@ body {
   .formBox {
     min-width: 18vw;
     margin-left: 1vw;
-    margin-right:18vw;
+    margin-right:14vw;
   }
   .btn {
-    margin-right: 12vw;
+    margin-right: 8vw;
   }
 }
 @media only screen and (max-width: 574px) {

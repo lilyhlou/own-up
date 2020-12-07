@@ -5,17 +5,19 @@ import { itemsFetchData } from '../actions/rates';
 
 class Table extends Component {
     componentDidMount() {
+        console.log(this.props)
         this.props.fetchData('http://599167402df2f40011e4929a.mockapi.io/items');
     }
     render() {
         if (this.props.hasErrored) {
-            return <p>Sorry! There was an error loading the items</p>;
+            return <p>Sorry, there was an error loading the items. Try refreshing and submitting again.</p>;
         }
 
         if (this.props.isLoading) {
             return <p>Loading…</p>;
         }
         return (
+            <div>
             <ul>
                 {this.props.items.map((item) => (
                     <li key={item.id}>
@@ -23,6 +25,12 @@ class Table extends Component {
                     </li>
                 ))}
             </ul>
+                <p>{this.props.search["credit"]}</p>
+                <p>{this.props.search["occupancy"]}</p>
+                <p>{this.props.search["property"]}</p>
+                <p>{this.props.search["loan"]}</p>
+
+            </div>
         );
     }
 }
