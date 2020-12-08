@@ -20,7 +20,7 @@ export function itemsIsLoading(state = false, action) {
 
 export function items(state = [], action) {
     switch (action.type) {
-        case 'ITEMS_FETCH_DATA_SUCCESS':
+        case 'ITEMS_FETCH_DATA_SUCCESS':      
             return action.items;
 
         default:

@@ -1,21 +1,22 @@
-import React, { Component, Fragment, useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import '../App.css';
-import { Form, FormControl, Container, Row, Col, InputGroup, Button } from 'react-bootstrap';
+import { Form, FormControl, Col, InputGroup, Button } from 'react-bootstrap';
 import Table from './Table';
+import { itemsFetchData } from '../actions/rates';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 
 class InputForm extends Component {
 	constructor (props) {
 		super(props);
-		this.state = {
-		  quotes: {},
+		this.state = { // form inputs are kept in state of input component
 		  search: {},
-		  isLoading: false,
+		  submitted: false,
+		  items: [],
 		};
 		//this.validate = this.validate.bind(this);
 		this.submit = this.submit.bind(this);
-
-
 	  }
 	  validate() {
 		  let search = this.state.search;
@@ -43,18 +44,16 @@ class InputForm extends Component {
 		  e.preventDefault();
 		  if(this.validate()) { // ensure that data entered is within bounds
 			alert("submitted successfully");
-		  } else {
 			this.setState({submitted: true});
-			alert("error");
+			this.props.fetchData(`https://ss6b2ke2ca.execute-api.us-east-1.amazonaws.com/Prod/quotes?loanSize=${this.state.search["loan"]}&creditScore=${this.state.search["credit"]}&propertyType=${this.state.search["property"]}&occupancy=${this.state.search["occupancy"]}`);
+		} else {
+			alert(this.validate());
 		  }
 	  }  
 	  update = (e) => {
 		let search = this.state.search;
 		search[e.target.name] = e.target.value;        
 		this.setState({search});
-
-		  console.log(e.target.value);
-		  console.log(e.target.name);
 	}
 	render() {
 		return(
@@ -77,10 +76,10 @@ class InputForm extends Component {
 						<Form.Label>Property Type</Form.Label>
 						<Form.Control as="select" defaultValue={'DEFAULT'} size="md" name="property" className="formBox" onChange={(e) => this.update(e)}>
 							<option value="DEFAULT" disabled hidden>Select Option</option>
-							<option value="singlefamily">Single Family</option>
-							<option value="condo">Condo</option>
-							<option value="townhouse">Townhouse</option>
-							<option value="multifamily">Multi-Family</option>
+							<option value="SingleFamily">Single Family</option>
+							<option value="Condo">Condo</option>
+							<option value="Townhouse">Townhouse</option>
+							<option value="MultiFamily">Multi-Family</option>
 						</Form.Control>
 						</div>
 					</Form.Group>
@@ -97,9 +96,9 @@ class InputForm extends Component {
 							<Form.Label>Occupancy</Form.Label>
 							<Form.Control as="select" size="md" name="occupancy" className="formBox" defaultValue={'DEFAULT'} onChange={(e) => this.update(e)}>
 								<option value="DEFAULT" disabled hidden>Select Option</option>
-								<option value="primary">Primary Residence</option>
-								<option value="secondary">Secondary Residence</option>
-								<option value="investment">Investment</option>
+								<option value="Primary">Primary Residence</option>
+								<option value="Secondary">Secondary Residence</option>
+								<option value="Investment">Investment</option>
 							</Form.Control>
 						</div>
 					</Form.Group>
@@ -116,14 +115,34 @@ class InputForm extends Component {
 					</Form.Group>
 				</Form.Row>
   			</Form>
-			<Table 
-				search={this.state.search}
-				isLoading={this.state.isLoading}
+			<Table
+				submitted={this.state.submitted}
 			>
 			</Table>
 		</div>
 		);
 	}
 }
-export default InputForm;
+
+InputForm.propTypes = {
+	fetchData: PropTypes.func.isRequired,
+    items: PropTypes.array.isRequired,
+    hasErrored: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired
+};
+const mapStateToProps = (state) => {
+    return {
+        items: state.items,
+        hasErrored: state.itemsHasErrored,
+        isLoading: state.itemsIsLoading
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+		fetchData: (url) => dispatch(itemsFetchData(url)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(InputForm);
 
