@@ -37,14 +37,14 @@ class RateTable extends Component {
   </thead>
   <tbody>
       {this.props.items.map((item, i) => (
-                   <tr key={i}>
+                <tr key={i}>
                    <td>{(item.lenderName.length > 14) ? item.lenderName.substr(0, 13) + '...' : item.lenderName}</td> 
                    <td >{item.loanType}</td> 
                    <td >{item.interestRate}%</td> 
                    <td >${item.closingCosts.toFixed(2)}</td> 
                    <td >${item.monthlyPayment.toFixed(2)}</td> 
                    <td>{item.apr.toFixed(3)}%</td> 
-                   </tr>
+                </tr>
                 ))}
   </tbody>
 </Table>
@@ -64,6 +64,5 @@ const mapStateToProps = (state) => {
         isLoading: state.itemsIsLoading
     };
 };
-
 
 export default connect(mapStateToProps)(RateTable);

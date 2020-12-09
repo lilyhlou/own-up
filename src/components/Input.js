@@ -149,11 +149,13 @@ class InputForm extends Component {
   			</Alert>
 			  </Col>
 
-			  </Row>
+			  </Row >
+			  <Row className="d-flex">
 			<RateTable
 				submitted={this.state.submitted}
 			>
 			</RateTable>
+			</Row>
 		</Container>
 		);
 	}

@@ -1,6 +1,8 @@
 .App {
   text-align: center;
 }
+
+/* for input form */
 .input {
   display: flex;
   white-space:nowrap
@@ -20,24 +22,44 @@ form {
 .button {
   margin-right: 6vw;
 }
-.blackBackground {
+.blackBackground { /* for find rates button */
   background-color:#143f3d!important;
   border-color: #143f3d!important;
 }
-body {
-  color: #143f3d;
-}
+/* alerts */
+.alert {
+  width: 80%!important;
+  margin: auto;
+  margin-top: 5vh;
 
+}
 .error {
   border:1px solid #ff0000!important;
   border-radius: .25rem;
 }
+/* for table */
+.table {
+  border: 1px solid rgb(201, 201, 201);
+  width: 60%!important;
+  margin: auto;
+  margin-top: 8vh;
+}
+thead tr th {
+  color: rgb(168, 168, 168);
+}
+tbody tr td {
+  color: #143f3d;
+}
+.table td, .table th {
+  padding-left: .35rem!important;
+  padding-right: .35rem!important;
 
+}
+/* css for increased responsiveness */
 @media only screen and (max-width: 1080px) {
   #forMedScreen .justify-content-end.d-flex.button {
     margin-right: 0rem;
   }
-
   .formBox {
     min-width: 24vw;
 
