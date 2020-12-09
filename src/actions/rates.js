@@ -27,7 +27,6 @@ export function itemsFetchData(url) {
         dispatch(itemsIsLoading(true));
         fetch(url, {
             method: 'GET',
-            mode: 'cors', // so it doesn't give an API error in Safari 
             headers: new Headers({
               'Authorization': 'OU-AUTH ' + process.env.REACT_APP_API_KEY
             })

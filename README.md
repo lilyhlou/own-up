@@ -5,11 +5,14 @@ This project was created for [Own Up](ownup.com)'s coding challenge. The goal wa
 (insert screenshot of app)
 ### Technologies Used
 
-* [Dot Env](https://www.npmjs.com/package/dotenv) for hiding the API key in committed code
-* [Create React App](https://github.com/facebook/create-react-app/tree/master)
-* [Redux Thunk](https://github.com/reduxjs/redux-thunk)
+* [Create React App](https://github.com/facebook/create-react-app/tree/master) for UI
+* [React-Bootstrap]() for responsive UI
+* [Redux Thunk](https://github.com/reduxjs/redux-thunk) and [React-Redux](https://react-redux.js.org/) for state management 
 * Own Up's Rate Quote API
-
+* [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for calling and interacting with the API
+* [Dot Env](https://www.npmjs.com/package/dotenv) for hiding the API key in committed code
+* [Jest](https://jestjs.io/) and [React Test Rnderer](https://reactjs.org/docs/test-renderer.html) for testing 
+)
 ### How to Run
 ##### Downloading and opening the code
 1. Open terminal and run `git clone https://github.com/lilyhlou/own-up.git` in terminal or open with Github Desktop/download a zip file of the code.

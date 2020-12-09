@@ -37,13 +37,13 @@ class RateTable extends Component {
   </thead>
   <tbody>
       {this.props.items.map((item, i) => (
-                   <tr>
-                   <td key={i+"lenderName"}>{item.lenderName}</td> 
-                   <td key={i+"loanType"}>{item.loanType}</td> 
-                   <td key={i+"interestRate"}>{item.interestRate}%</td> 
-                   <td key={i+"closingCosts"}>${item.closingCosts}</td> 
-                   <td key={i+"monthlyPayment"}>${item.monthlyPayment}</td> 
-                   <td key={i+"apr"}>{item.apr}%</td> 
+                   <tr key={i}>
+                   <td>{(item.lenderName.length > 14) ? item.lenderName.substr(0, 13) + '...' : item.lenderName}</td> 
+                   <td >{item.loanType}</td> 
+                   <td >{item.interestRate}%</td> 
+                   <td >${item.closingCosts.toFixed(2)}</td> 
+                   <td >${item.monthlyPayment.toFixed(2)}</td> 
+                   <td>{item.apr.toFixed(3)}%</td> 
                    </tr>
                 ))}
   </tbody>
