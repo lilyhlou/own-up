@@ -1,4 +1,5 @@
-export function itemsHasErrored(bool) {
+export function itemsHasErrored(bool, dispatch) {
+    dispatch(itemsIsLoading(false));
     return {
         type: 'ITEMS_HAS_ERRORED',
         hasErrored: bool
@@ -12,7 +13,8 @@ export function itemsIsLoading(bool) {
     };
 }
 
-export function itemsFetchDataSuccess(items) {
+export function itemsFetchDataSuccess(items, dispatch) {
+    dispatch(itemsIsLoading(false));
     return {
         type: 'ITEMS_FETCH_DATA_SUCCESS',
         items
@@ -25,19 +27,20 @@ export function itemsFetchData(url) {
         dispatch(itemsIsLoading(true));
         fetch(url, {
             method: 'GET',
+            mode: 'cors', // so it doesn't give an API error in Safari 
             headers: new Headers({
               'Authorization': 'OU-AUTH ' + process.env.REACT_APP_API_KEY
             })
           })
             .then((response) => {
                 if (!response.ok) {
+                    console.log(response);
                     throw Error(response.statusText);
                 }
-                dispatch(itemsIsLoading(false));
                 return response;
             })
             .then((response) => response.json())
-            .then((items) => dispatch(itemsFetchDataSuccess(items.rateQuotes)))
-            .catch(() => dispatch(itemsHasErrored(true)));
+            .then((items) => dispatch(itemsFetchDataSuccess(items.rateQuotes, dispatch)))
+            .catch(() => dispatch(itemsHasErrored(true, dispatch)));
     };
 }

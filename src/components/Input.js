@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { Form, FormControl, Col, InputGroup, Button } from 'react-bootstrap';
-import Table from './Table';
+import { Form, FormControl, Row, Col, Container, InputGroup, Button, Alert } from 'react-bootstrap';
+import RateTable from './Table';
 import { itemsFetchData } from '../actions/rates';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -10,12 +10,15 @@ import PropTypes from 'prop-types';
 class InputForm extends Component {
 	constructor (props) {
 		super(props);
-		this.state = { // form inputs are kept in state of input component
-		  search: {},
-		  submitted: false,
-		  items: [],
+		this.state = { 
+		  search: {}, // form inputs are kept in state of input component
+		  submitted: false, // submitted value passed to table.js
+		  loanErr: false,
+		  propertyErr: false,
+		  creditErr: false,
+		  occupancyErr: false,
+		  errString: "" 
 		};
-		//this.validate = this.validate.bind(this);
 		this.submit = this.submit.bind(this);
 	  }
 	  validate() {
@@ -26,29 +29,52 @@ class InputForm extends Component {
 		  search["credit"] = parseInt(search["credit"]); // convert to string              
 		  this.setState({search});
   
-		  if(!search["loan"] || isNaN(search["loan"])) { // check if int (parseInt turns string into int if int, to NaN if unable to parse) and if loan exists 
-			  valid = false;
-		  }
+		if(isNaN(search["loan"])) { // check if int (parseInt turns string into int if int, to NaN if unable to parse) and if loan exists 
+				valid = false;
+				this.setState({loanErr: true});
+				this.setState({errString: "Loan input must be a whole number and can not contain any punctuation."});
+			} else {
+				this.setState({loanErr: false});
+			}
+
 		  if(!search["property"] || search["property"] === "") {
 			  valid = false;
+			  this.setState({propertyErr: true});
+			  this.setState({errString: "Select value from property drop down."});
+		  } else {
+			this.setState({propertyErr: false});
 		  }
-		  if(isNaN(search["credit"]) || search["credit"] < 300 || search["credit"] > 800 ) { // check if int and if credit is between 300 and 800
+
+		  if(isNaN(search["credit"])) { // either is nonexistent or 
+			valid = false;
+			this.setState({creditErr: true});
+			this.setState({errString: "Insert numerical value for credit field."});
+		} else if(search["credit"] < 300 || search["credit"] > 800 ) { // check if int and if credit is between 300 and 800
 			  valid = false;
+			  this.setState({creditErr: true});
+			  this.setState({errString: "Credit score must be a whole number between 300 and 800 and can not include any puncuation."});
+		  } else {
+			this.setState({creditErr: false});
 		  }
+
 		  if(!search["occupancy"] || search["occupancy"] === "") {
 			valid = false;
+			this.setState({occupancyErr: true});
+			this.setState({errString: "Select value from occupancy drop down."});
+		  } else {
+			this.setState({occupancyErr: false});
+		  }
+		if(valid) { // return to normal if there was prev. an error
+			this.setState({errString: ""});
 		}
 		return valid;
 	  }
 	  submit(e) {
 		  e.preventDefault();
 		  if(this.validate()) { // ensure that data entered is within bounds
-			alert("submitted successfully");
 			this.setState({submitted: true});
 			this.props.fetchData(`https://ss6b2ke2ca.execute-api.us-east-1.amazonaws.com/Prod/quotes?loanSize=${this.state.search["loan"]}&creditScore=${this.state.search["credit"]}&propertyType=${this.state.search["property"]}&occupancy=${this.state.search["occupancy"]}`);
-		} else {
-			alert(this.validate());
-		  }
+		} 
 	  }  
 	  update = (e) => {
 		let search = this.state.search;
@@ -57,13 +83,14 @@ class InputForm extends Component {
 	}
 	render() {
 		return(
-			<div>
+			<Container fluid={true}>
 			<Form id="forMedScreen">
   				<Form.Row>
 					<Form.Group as={Col} md className="d-flex justify-content-end">     
 						<div className="form-inline">
 						<Form.Label>Loan Size</Form.Label>
-						<InputGroup className="mb-3 formBox">
+						<InputGroup className={"formBox mb-3" + (this.state.loanErr ? ' error' : ' noerror')}>
+						<div className="flex"></div>
 						<InputGroup.Prepend>
       						<InputGroup.Text>$</InputGroup.Text>
     					</InputGroup.Prepend>
@@ -74,7 +101,7 @@ class InputForm extends Component {
 					<Form.Group as={Col} md className="d-flex justify-content-end"> 
 						<div className="form-inline">
 						<Form.Label>Property Type</Form.Label>
-						<Form.Control as="select" defaultValue={'DEFAULT'} size="md" name="property" className="formBox" onChange={(e) => this.update(e)}>
+						<Form.Control as="select" defaultValue={'DEFAULT'} size="md" name="property" className={"formBox" + (this.state.propertyErr ? ' error' : ' noerror')} onChange={(e) => this.update(e)}>
 							<option value="DEFAULT" disabled hidden>Select Option</option>
 							<option value="SingleFamily">Single Family</option>
 							<option value="Condo">Condo</option>
@@ -88,13 +115,13 @@ class InputForm extends Component {
     				<Form.Group as={Col} md className="d-flex justify-content-end">
 						<div className="form-inline">
 						<Form.Label>Credit Score</Form.Label>
-						<FormControl type="text" placeholder="600-800" id="bar" size="md" name="credit" className="formBox" onChange={(e) => this.update(e)}/>
+						<FormControl type="text" placeholder="300-800" id="bar" size="md" name="credit" className={"formBox" + (this.state.creditErr ? ' error' : ' noerror')} onChange={(e) => this.update(e)}/>
 						</div>
 					</Form.Group>
     				<Form.Group as={Col} md className="d-flex justify-content-end">
 						<div className="form-inline">
 							<Form.Label>Occupancy</Form.Label>
-							<Form.Control as="select" size="md" name="occupancy" className="formBox" defaultValue={'DEFAULT'} onChange={(e) => this.update(e)}>
+							<Form.Control as="select" size="md" name="occupancy" className={"formBox" + (this.state.occupancyErr ? ' error' : ' noerror')} defaultValue={'DEFAULT'} onChange={(e) => this.update(e)}>
 								<option value="DEFAULT" disabled hidden>Select Option</option>
 								<option value="Primary">Primary Residence</option>
 								<option value="Secondary">Secondary Residence</option>
@@ -110,16 +137,24 @@ class InputForm extends Component {
 							className="blackBackground"
 							onClick={this.submit}
 						>
-							Quote Rates
+							{this.props.isLoading ? 'Loading…' : 'Quote Rates'}
 						</Button>
 					</Form.Group>
 				</Form.Row>
   			</Form>
-			<Table
+			  <Row>
+			  <Col>
+			<Alert variant="danger" className={(this.state.errString !== "") ? 'd-block' : 'd-none'}>
+    			{this.state.errString}
+  			</Alert>
+			  </Col>
+
+			  </Row>
+			<RateTable
 				submitted={this.state.submitted}
 			>
-			</Table>
-		</div>
+			</RateTable>
+		</Container>
 		);
 	}
 }

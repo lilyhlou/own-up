@@ -21,7 +21,7 @@ This project was created for [Own Up](ownup.com)'s coding challenge. The goal wa
 
 ##### Running the app locally 
 * `npm start` to run the app in development mode.
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will reload if you make edits (note: terminate app with "control + c" and run `npm start` again if API key is updated in .env file).
+Open [http://localhost:3000](http://localhost:3000) in browser to view it in the browser. The page will reload if you make edits (note: terminate app with "control + c" and run `npm start` again if API key is updated in .env file).
 Press option + command + c and click the console tab of inspector to see errors or to inspect code.
 
 * `npm test` to run tests.
