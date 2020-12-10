@@ -19,8 +19,9 @@
 form {
   margin-top: 10vh;
 }
-.button {
-  margin-right: 6vw;
+.button, .btn {
+  text-align: right;
+  margin-right: 0rem;
 }
 .blackBackground { /* for find rates button */
   background-color:#143f3d!important;
@@ -31,7 +32,6 @@ form {
   width: 80%!important;
   margin: auto;
   margin-top: 5vh;
-
 }
 .error {
   border:1px solid #ff0000!important;
@@ -91,8 +91,10 @@ tbody tr td {
     margin-left: .5vw;
     margin-right:0rem;
   }
+  .button, .btn {
+    text-align: center;
+  }
 }
-
 @media only screen and (min-width: 1300px) {
   .formBox {
     min-width: 18vw;
@@ -100,7 +102,7 @@ tbody tr td {
     margin-right:14vw;
   }
   .btn {
-    margin-right: 8vw;
+    margin-right: 14vw;
   }
 }
 @media only screen and (max-width: 574px) {

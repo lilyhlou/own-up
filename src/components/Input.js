@@ -12,7 +12,7 @@ class InputForm extends Component {
 		super(props);
 		this.state = { 
 		  search: {}, // form inputs are kept in state of input component
-		  submitted: false, // submitted value passed to table.js
+		  submitted: false, // passed to table.js
 		  // keeping track of form inputs for error message
 		  loanErr: false, 
 		  propertyErr: false,
@@ -26,15 +26,10 @@ class InputForm extends Component {
 		let search = this.state.search;
 		let valid = true;
 		
-		// convert input to int from string
-		if(search["loan"]==="" || isNaN(parseInt(search["loan"]))) { // check if int (parseInt turns string into int if int, to NaN if unable to parse) and if loan exists 
+		if(!search["loan"] || search["loan"]==="") { 
 			valid = false;
 			this.setState({loanErr: true});
-			if(search["loan"]==="") {
-				this.setState({errString: "Insert whole numbers in loan size field."});
-			} else {
-				this.setState({errString: "Loan input must be a whole number and can not contain any punctuation."});
-			} 
+			this.setState({errString: "Insert value in loan size field."});
 		} else {
 			this.setState({loanErr: false});
 		}
@@ -47,15 +42,15 @@ class InputForm extends Component {
 			this.setState({propertyErr: false});
 		}
 
-		if(isNaN(parseInt(search["credit"])) || search["credit"] < 300 || search["credit"] > 800 || search["credit"] === "") { // either is nonexistent or not numeric
+		if(isNaN(parseInt(search["credit"])) || search["credit"] < 300 || search["credit"] > 800 || search["credit"] === "") { // check if int (parseInt turns string into int if int, to NaN if unable to parse) 
 			valid = false;
 			this.setState({creditErr: true});
 		  	if(search["credit"] < 300 || search["credit"] > 800 ) { // check if credit is between 300 and 800
 				this.setState({errString: "Credit score must be a whole number between 300 and 800."});
-			} else if (search["credit"] === "") {
-				this.setState({errString: "Insert whole numbers in credit score field."});
+			} else if (!search["credit"] || search["credit"] === "") {
+				this.setState({errString: "Insert value in credit score field."});
 			} else {
-				this.setState({errString: "Credit score field can not include any puncuation or letters."});
+				this.setState({errString: "Credit score field must be whole number and cannot contain decimal values."});
 			}
 		} else {
 			this.setState({creditErr: false});
@@ -98,7 +93,7 @@ class InputForm extends Component {
 										<InputGroup.Prepend>
 											<InputGroup.Text>$</InputGroup.Text>
 										</InputGroup.Prepend>
-										<FormControl type="text" placeholder="450,000" size="md" name="loan" onChange={(e) => this.update(e)}/>
+										<FormControl type="number" min="300" placeholder="450,000" size="md" name="loan" onChange={(e) => this.update(e)}/>
 									</InputGroup>
 								</div>
 						</Form.Group>
@@ -119,7 +114,7 @@ class InputForm extends Component {
 						<Form.Group as={Col} md className="d-flex justify-content-end">
 							<div className="form-inline">
 								<Form.Label>Credit Score</Form.Label>
-								<FormControl type="text" placeholder="300-800" size="md" name="credit" className={"formBox" + (this.state.creditErr ? ' error' : ' noerror')} onChange={(e) => this.update(e)}/>
+								<FormControl type="number" min="300" max="800" placeholder="300-800" size="md" name="credit" className={"formBox" + (this.state.creditErr ? ' error' : ' noerror')} onChange={(e) => this.update(e)}/>
 							</div>
 						</Form.Group>
 						<Form.Group as={Col} md className="d-flex justify-content-end">
@@ -135,7 +130,9 @@ class InputForm extends Component {
 						</Form.Group>
 					</Form.Row>
 					<Form.Row>
-						<Form.Group as={Col} md className="d-flex justify-content-end button">
+						<Form.Group as={Col} md className="justify-content-end">
+						</Form.Group>
+						<Form.Group as={Col} md className="justify-content-end button">
 							<Button
 								type="submit"
 								className="blackBackground"
