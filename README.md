@@ -11,8 +11,8 @@ This project was created for [Own Up](ownup.com)'s coding challenge. The goal wa
 * Own Up's Rate Quote API
 * [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for calling and interacting with the API
 * [Dot Env](https://www.npmjs.com/package/dotenv) for hiding the API key in committed code
-* [Jest](https://jestjs.io/) and [React Test Rnderer](https://reactjs.org/docs/test-renderer.html) for testing 
-)
+* [Jest](https://jestjs.io/), [React Test Rnderer](https://reactjs.org/docs/test-renderer.html) and [Enzyme](https://enzymejs.github.io/enzyme/)for testing 
+
 ### How to Run
 ##### Downloading and opening the code
 1. Open terminal and run `git clone https://github.com/lilyhlou/own-up.git` in terminal or open with Github Desktop/download a zip file of the code.

@@ -8,9 +8,8 @@
   white-space:nowrap
 }
 .formBox {
-  min-width: 18vw;
   margin-left: 2rem; 
-  margin-right: 10rem; 
+  margin-right: 4rem; 
 }
 .dropdown-menu{
   width: 100%;
@@ -19,9 +18,14 @@
 form {
   margin-top: 10vh;
 }
+.button {
+  padding-right: 4.5rem!important;
+}
+
 .button, .btn {
-  text-align: right;
   margin-right: 0rem;
+  text-align: right;
+
 }
 .blackBackground { /* for find rates button */
   background-color:#143f3d!important;
@@ -40,7 +44,7 @@ form {
 /* for table */
 .table {
   border: 1px solid rgb(201, 201, 201);
-  width: 60%!important;
+  width: 70%!important;
   margin: auto;
   margin-top: 8vh;
 }
@@ -50,64 +54,20 @@ thead tr th {
 tbody tr td {
   color: #143f3d;
 }
-.table td, .table th {
-  padding-left: .35rem!important;
-  padding-right: .35rem!important;
 
-}
-/* css for increased responsiveness */
-@media only screen and (max-width: 1080px) {
-  #forMedScreen .justify-content-end.d-flex.button {
-    margin-right: 0rem;
-  }
-  .formBox {
-    min-width: 24vw;
 
-    margin-left: 1vw;
-    margin-right:0rem;
-  }
-.form-inline label {
-  display: block
-}
-.col-md {
-  padding-right: 10vw!important;
-}
-}
 
-@media only screen and (max-width: 800px) {
+/* css for increased responsiveness on smaller screens */
+
+@media (max-width: 768px) {
   #forMedScreen .justify-content-end.d-flex {
     justify-content: center!important;
   }
-  #forMedScreen .justify-content-end.d-flex.button {
-    margin-right: 0rem;
-  }
-  .form-row>.col {
-    padding-left: 0px;
-  }
-  .col-md {
-    padding-right: 0px!important;
-  }
-  .formBox {
-    margin-left: .5vw;
-    margin-right:0rem;
-  }
-  .button, .btn {
+  .button {
     text-align: center;
+    padding-right: 0rem!important;
   }
 }
-@media only screen and (min-width: 1300px) {
-  .formBox {
-    min-width: 18vw;
-    margin-left: 1vw;
-    margin-right:14vw;
-  }
-  .btn {
-    margin-right: 14vw;
-  }
-}
-@media only screen and (max-width: 574px) {
-  .formBox {
-    margin-left: .5vw;
-    min-width: 45vw;
-  }
-}
+
+
+

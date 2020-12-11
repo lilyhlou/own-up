@@ -86,20 +86,22 @@ class InputForm extends Component {
 			<Container fluid={true}>
 				<Form id="forMedScreen">
 					<Form.Row>
-						<Form.Group as={Col} md className="d-flex justify-content-end">     
-								<div className="form-inline">
+						<Form.Group as={Col} lg="2"md="2" className="d-flex justify-content-end">     
 									<Form.Label>Loan Size</Form.Label>
+						</Form.Group>
+						<Form.Group as={Col} lg="4" md="4" className="d-flex justify-content-start">     
 									<InputGroup className={"formBox mb-3" + (this.state.loanErr ? ' error' : ' noerror')}>
 										<InputGroup.Prepend>
 											<InputGroup.Text>$</InputGroup.Text>
 										</InputGroup.Prepend>
 										<FormControl type="number" min="300" placeholder="450,000" size="md" name="loan" onChange={(e) => this.update(e)}/>
 									</InputGroup>
-								</div>
 						</Form.Group>
-						<Form.Group as={Col} md className="d-flex justify-content-end"> 
-							<div className="form-inline">
+						<Form.Group as={Col} lg="2" md="2" className="d-flex justify-content-end"> 
 								<Form.Label>Property Type</Form.Label>
+								</Form.Group>
+								<Form.Group as={Col} lg="4" md="4" className="d-flex justify-content-start"> 
+
 								<Form.Control as="select" defaultValue={'DEFAULT'} size="md" name="property" className={"formBox" + (this.state.propertyErr ? ' error' : ' noerror')} onChange={(e) => this.update(e)}>
 									<option value="DEFAULT" disabled hidden>Select Option</option>
 									<option value="SingleFamily">Single Family</option>
@@ -107,32 +109,33 @@ class InputForm extends Component {
 									<option value="Townhouse">Townhouse</option>
 									<option value="MultiFamily">Multi-Family</option>
 								</Form.Control>
-							</div>
 						</Form.Group>
 					</Form.Row>
 					<Form.Row>
-						<Form.Group as={Col} md className="d-flex justify-content-end">
-							<div className="form-inline">
+						<Form.Group as={Col} md="2" className="d-flex justify-content-end">
+
 								<Form.Label>Credit Score</Form.Label>
+								</Form.Group>
+								<Form.Group as={Col} lg="4" md="4" className="d-flex justify-content-start">
+
 								<FormControl type="number" min="300" max="800" placeholder="300-800" size="md" name="credit" className={"formBox" + (this.state.creditErr ? ' error' : ' noerror')} onChange={(e) => this.update(e)}/>
-							</div>
 						</Form.Group>
-						<Form.Group as={Col} md className="d-flex justify-content-end">
-							<div className="form-inline">
+						<Form.Group as={Col} lg="2" md="2" className="d-flex justify-content-end">
 								<Form.Label>Occupancy</Form.Label>
+							</Form.Group>
+							<Form.Group as={Col} md="4" className="d-flex justify-content-start">
 								<Form.Control as="select" size="md" name="occupancy" className={"formBox" + (this.state.occupancyErr ? ' error' : ' noerror')} defaultValue={'DEFAULT'} onChange={(e) => this.update(e)}>
 									<option value="DEFAULT" disabled hidden>Select Option</option>
 									<option value="Primary">Primary Residence</option>
 									<option value="Secondary">Secondary Residence</option>
 									<option value="Investment">Investment</option>
 								</Form.Control>
-							</div>
 						</Form.Group>
 					</Form.Row>
 					<Form.Row>
-						<Form.Group as={Col} md className="justify-content-end">
+						<Form.Group as={Col} md="8" lg="8" className="justify-content-start">
 						</Form.Group>
-						<Form.Group as={Col} md className="justify-content-end button">
+						<Form.Group as={Col} md="4" lg="4" className="justify-content-start button">
 							<Button
 								type="submit"
 								className="blackBackground"
