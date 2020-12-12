@@ -16,18 +16,15 @@ describe('Testing Input.js', () => {
   beforeEach(() => {
     store = mockStore({
       items: [],
-      hasErrored: false,
-      isLoading: false,
+      itemsHasErrored: false,
+      itemsIsLoading: false,
   });
  
     store.dispatch = jest.fn();
  
     component = renderer.create(
       <Provider store={store}>
-        <InputForm
-        itemsHasErrored={false}
-        itemsIsLoading={false}
-        />
+        <InputForm/>
       </Provider>
     );
   });
@@ -35,9 +32,17 @@ describe('Testing Input.js', () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
   it('should dispatch an action on button click', () => {
-
-         });
-   });
+    const loan = <label>Loan Size</label>;
+    const credit = <label>Property Type</label>;
+    const property = <label>Credit Score</label>;
+    const occupancy = <label>Occupancy</label>;
+    expect(component.contains(loan));
+    expect(component.contains(credit));
+    expect(component.contains(property));
+    expect(component.contains(occupancy));
+    expect(component.find("button").prop("type")).toBe("submit");
+  });
+});
 
 
 /*

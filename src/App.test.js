@@ -3,18 +3,20 @@ import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 import App from './App';
- 
+import ReactDOM from 'react-dom';
+
+
 const mockStore = configureStore([]);
  
-describe('My Connected React-Redux Component', () => {
+describe('App.js snapshot test', () => {
   let store;
   let component;
  
   beforeEach(() => {
       store = mockStore({
       items: [],
-      hasErrored: false,
-      isLoading: false,
+      itemsHasErrored: false,
+      itemsIsLoading: false,
     });
     component = renderer.create(
       <Provider store={store}>
@@ -26,8 +28,15 @@ describe('My Connected React-Redux Component', () => {
   it('should render with given state from Redux store', () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
- 
-  it('should dispatch an action on button click', () => {
- 
-  });
-});
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(
+      <Provider store={store}>
+        <App />
+      </Provider>
+    , div);
+    ReactDOM.unmountComponentAtNode(div);
+
+  })
+ });
+
