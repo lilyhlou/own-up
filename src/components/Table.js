@@ -3,15 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Table, Alert, Row, Col } from 'react-bootstrap';
 
-class RateTable extends Component {
+export class RateTable extends Component {
     render() {
         if (!this.props.submitted || this.props.isLoading) { 
             return <p></p>;
-        }
-        if(this.props.submitted && this.props.items.length === 0) { // api returned no results in items list
-            return <Alert variant="warning">
-                        No results found.  
-                    </Alert>
         }
         if (this.props.hasErrored) { // error from API 
             return 	<Row>
@@ -22,6 +17,12 @@ class RateTable extends Component {
                         </Col>
                     </Row>
         }
+        if(this.props.submitted && this.props.items.length === 0) { // api returned no results in items list
+            return <Alert variant="warning">
+                        No results found.  
+                    </Alert>
+        }
+
         return (
             <Table responsive>
                 <thead>

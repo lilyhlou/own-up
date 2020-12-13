@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 
-class InputForm extends Component {
+export class InputForm extends Component {
 	constructor (props) {
 		super(props);
 		this.state = { 
