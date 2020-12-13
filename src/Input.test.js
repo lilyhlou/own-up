@@ -34,193 +34,342 @@ describe('Testing Input.js', () => {
   });
 
   let wrapper;
-  // our mock login function to replace the one provided by mapDispatchToProps
-  const mockfunction = jest.fn();
-  it('submit button', () => {
-    wrapper = shallow(<InputForm   
+  const mockFetchDataFunction = jest.fn();
+  it('submit button with no input in form', () => {
+    wrapper = shallow(
+    <InputForm   
       items={[]}
       hasErrored={false}
       isLoading={false}
-      fetchData={mockfunction}/>)
-
-    console.log(wrapper.debug());
+      fetchData={mockFetchDataFunction}
+    />)
     wrapper.find('Button').simulate(
-      'submit', 
+      'click', 
       {preventDefault() {}}
     )
-    expect(mockfunction.mock.calls.length).toBe(0)
-   })
-   it('show error alert', () => {
+    expect(wrapper.instance().validate()).toBe(false); // test validate function
+    expect(wrapper.state('submitted')).toEqual(false);
+
+  });
+
+   it('form filled out correctly', () => {
     wrapper = shallow(<InputForm   
       items={[]}
       hasErrored={false}
       isLoading={false}
-      fetchData={mockfunction}/>)
+      fetchData={mockFetchDataFunction}
+    />)
+    expect(wrapper.instance().validate()).toBe(false);
+
+    wrapper.find('FormControl').at(0).simulate('change', 
+      {target: 
+        {name: 'loan', value: '523532'}
+      });
+      expect(wrapper.state('search')["loan"]).toEqual("523532");
+
+      wrapper.find('FormControl').at(1).simulate('change', 
+        {target: 
+          {name: 'property', value: 'SingleFamily'}
+      });
+      expect(wrapper.state('search')["property"]).toEqual("SingleFamily");
+
+      wrapper.find('FormControl').at(2).simulate('change', 
+        {target: 
+          {name: 'credit', value: '750'}
+      });
+      expect(wrapper.state('search')["credit"]).toEqual("750");
+
+      wrapper.find('FormControl').at(3).simulate('change', 
+        {target: 
+          {name: 'occupancy', value: 'Primary'}
+      });
+      expect(wrapper.state('search')["occupancy"]).toEqual("Primary");
+      expect(wrapper.state('submitted')).toEqual(false);
+      expect(mockFetchDataFunction).not.toHaveBeenCalled();
+
+      wrapper.find('Button').simulate(
+        'click', 
+        {preventDefault() {}}
+      );
+    expect(wrapper.state('submitted')).toEqual(true);
+    expect(mockFetchDataFunction).toHaveBeenCalled(); // calls fetch data
+    expect(wrapper.instance().validate()).toBe(true); 
+   })
+   it('loan field blank, everything else completed', () => {
+    wrapper = shallow(<InputForm   
+      items={[]}
+      hasErrored={false}
+      isLoading={false}
+      fetchData={mockFetchDataFunction}/>)
       expect(wrapper.instance().validate()).toBe(false);
 
-      wrapper.find('FormControl').at(0).simulate(
-        'onChange', 
-        {target: 
-          {name: 'loan', value: '523532'}
-        }
-       );
-       wrapper.find('FormControl').at(1).simulate(
-        'onChange', 
+      wrapper.find('FormControl').at(1).simulate(
+        'change', 
         {target: 
           {name: 'property', value: 'SingleFamily'}
         }
        );
-       wrapper.find('FormControl').at(2).simulate(
-        'onChange', 
+       expect(wrapper.state('search')["property"]).toEqual("SingleFamily");
+
+      wrapper.find('FormControl').at(2).simulate(
+        'change', 
         {target: 
           {name: 'credit', value: '750'}
         }
        );
+      expect(wrapper.state('search')["credit"]).toEqual("750");
+
        wrapper.find('FormControl').at(3).simulate(
-        'onChange', 
+        'change', 
         {target: 
           {name: 'occupancy', value: 'Primary'}
         }
        );
+       expect(wrapper.state('search')["occupancy"]).toEqual("Primary");
+       expect(wrapper.state('submitted')).toEqual(false);
+       expect(mockFetchDataFunction).not.toHaveBeenCalled();
+
        wrapper.find('Button').simulate(
-        'submit', 
+        'click', 
         {preventDefault() {}}
       );
-  
-      expect(wrapper.instance().validate()).toBe(true);
-  
+      expect(wrapper.instance().validate()).toBe(false); 
+      expect(wrapper.state('errString')).toBe("Insert value in loan size field.");
+      expect(wrapper.state('submitted')).toEqual(false);
+      expect(mockFetchDataFunction).not.toHaveBeenCalled();
+   })
+   it('credit score out of range', () => {
+    wrapper = shallow(<InputForm   
+      items={[]}
+      hasErrored={false}
+      isLoading={false}
+      fetchData={mockFetchDataFunction}/>)
+      expect(wrapper.instance().validate()).toBe(false);
+
+      wrapper.find('FormControl').at(0).simulate(
+        'change', 
+        {target: 
+          {name: 'loan', value: '523532'}
+        }
+       );
+       expect(wrapper.state('search')["loan"]).toEqual("523532");
+
+       wrapper.find('FormControl').at(1).simulate(
+        'change', 
+        {target: 
+          {name: 'property', value: 'SingleFamily'}
+        }
+       );
+       expect(wrapper.state('search')["property"]).toEqual("SingleFamily");
+
+       wrapper.find('FormControl').at(2).simulate(
+        'change', 
+        {target: 
+          {name: 'credit', value: '1750'}
+        }
+       );
+       expect(wrapper.state('search')["credit"]).toEqual("1750");
+
+       wrapper.find('FormControl').at(3).simulate(
+        'change', 
+        {target: 
+          {name: 'occupancy', value: 'Primary'}
+        }
+       );
+       expect(wrapper.state('search')["occupancy"]).toEqual("Primary");
+       expect(wrapper.state('submitted')).toEqual(false);
+       expect(mockFetchDataFunction).not.toHaveBeenCalled();
+
+       wrapper.find('Button').simulate(
+        'click', 
+        {preventDefault() {}}
+      );
+      expect(wrapper.state('submitted')).toEqual(false);
+      expect(wrapper.instance().validate()).toBe(false); 
+      expect(wrapper.state('errString')).toBe("Credit score must be a whole number between 300 and 800.");
+      expect(mockFetchDataFunction).not.toHaveBeenCalled();
+   })
+   it('credit score blank', () => {
+    wrapper = shallow(<InputForm   
+      items={[]}
+      hasErrored={false}
+      isLoading={false}
+      fetchData={mockFetchDataFunction}/>)
+      expect(wrapper.instance().validate()).toBe(false);
+
+      wrapper.find('FormControl').at(0).simulate(
+        'change', 
+        {target: 
+          {name: 'loan', value: '523532'}
+        }
+       );
+       expect(wrapper.state('search')["loan"]).toEqual("523532");
+
+       wrapper.find('FormControl').at(1).simulate(
+        'change', 
+        {target: 
+          {name: 'property', value: 'SingleFamily'}
+        }
+       );
+       expect(wrapper.state('search')["property"]).toEqual("SingleFamily");
+
+       wrapper.find('FormControl').at(3).simulate(
+        'change', 
+        {target: 
+          {name: 'occupancy', value: 'Primary'}
+        }
+       );
+       expect(wrapper.state('search')["occupancy"]).toEqual("Primary");
+       expect(wrapper.state('submitted')).toEqual(false);
+       expect(mockFetchDataFunction).not.toHaveBeenCalled();
+
+       wrapper.find('Button').simulate(
+        'click', 
+        {preventDefault() {}}
+      );
+      expect(wrapper.state('submitted')).toEqual(false);
+      expect(wrapper.instance().validate()).toBe(false); 
+      expect(wrapper.state('errString')).toBe("Insert value in credit score field.");
+      expect(mockFetchDataFunction).not.toHaveBeenCalled();
+   })
+   it('credit score with decimal values', () => {
+    wrapper = shallow(<InputForm   
+      items={[]}
+      hasErrored={false}
+      isLoading={false}
+      fetchData={mockFetchDataFunction}/>)
+      expect(wrapper.instance().validate()).toBe(false);
+
+      wrapper.find('FormControl').at(0).simulate(
+        'change', 
+        {target: 
+          {name: 'loan', value: '523532'}
+        }
+       );
+       expect(wrapper.state('search')["loan"]).toEqual("523532");
+
+       wrapper.find('FormControl').at(1).simulate(
+        'change', 
+        {target: 
+          {name: 'property', value: 'SingleFamily'}
+        }
+       );
+       expect(wrapper.state('search')["property"]).toEqual("SingleFamily");
+
+       wrapper.find('FormControl').at(2).simulate(
+        'change', 
+        {target: 
+          {name: 'credit', value: '750.3'}
+        }
+       );
+       expect(wrapper.state('search')["credit"]).toEqual("750.3");
+
+       wrapper.find('FormControl').at(3).simulate(
+        'change', 
+        {target: 
+          {name: 'occupancy', value: 'Primary'}
+        }
+       );
+       expect(wrapper.state('search')["occupancy"]).toEqual("Primary");
+       expect(wrapper.state('submitted')).toEqual(false);
+       expect(mockFetchDataFunction).not.toHaveBeenCalled();
+
+       wrapper.find('Button').simulate(
+        'click', 
+        {preventDefault() {}}
+      );
+      expect(wrapper.state('submitted')).toEqual(false);
+      expect(wrapper.instance().validate()).toBe(false); 
+      expect(wrapper.state('errString')).toBe("Credit score field must be whole number and cannot contain decimal values.");
+      expect(mockFetchDataFunction).not.toHaveBeenCalled();
+   })
+   it('property type field blank, everything else completed', () => {
+    wrapper = shallow(<InputForm   
+      items={[]}
+      hasErrored={false}
+      isLoading={false}
+      fetchData={mockFetchDataFunction}/>)
+      expect(wrapper.instance().validate()).toBe(false);
+
+      wrapper.find('FormControl').at(0).simulate(
+        'change', 
+        {target: 
+          {name: 'loan', value: '523532'}
+        }
+       );
+       expect(wrapper.state('search')["loan"]).toEqual("523532");
+       
+      wrapper.find('FormControl').at(2).simulate(
+        'change', 
+        {target: 
+          {name: 'credit', value: '750'}
+        }
+       );
+      expect(wrapper.state('search')["credit"]).toEqual("750");
+
+       wrapper.find('FormControl').at(3).simulate(
+        'change', 
+        {target: 
+          {name: 'occupancy', value: 'Primary'}
+        }
+       );
+       expect(wrapper.state('search')["occupancy"]).toEqual("Primary");
+       expect(wrapper.state('submitted')).toEqual(false);
+       expect(mockFetchDataFunction).not.toHaveBeenCalled();
+
+       wrapper.find('Button').simulate(
+        'click', 
+        {preventDefault() {}}
+      );
+      expect(wrapper.instance().validate()).toBe(false); 
+      expect(wrapper.state('errString')).toBe("Select property type value from drop down.");
+      expect(wrapper.state('submitted')).toEqual(false);
+      expect(mockFetchDataFunction).not.toHaveBeenCalled();
+   })
+   it('occupancy type field blank, everything else completed', () => {
+    wrapper = shallow(<InputForm   
+      items={[]}
+      hasErrored={false}
+      isLoading={false}
+      fetchData={mockFetchDataFunction}/>)
+      expect(wrapper.instance().validate()).toBe(false);
+
+      wrapper.find('FormControl').at(0).simulate(
+        'change', 
+        {target: 
+          {name: 'loan', value: '523532'}
+        }
+       );
+       expect(wrapper.state('search')["loan"]).toEqual("523532");
+       
+       wrapper.find('FormControl').at(1).simulate(
+        'change', 
+        {target: 
+          {name: 'property', value: 'SingleFamily'}
+        }
+       );
+       expect(wrapper.state('search')["property"]).toEqual("SingleFamily");
+
+      wrapper.find('FormControl').at(2).simulate(
+        'change', 
+        {target: 
+          {name: 'credit', value: '750'}
+        }
+       );
+      expect(wrapper.state('search')["credit"]).toEqual("750");
+
+       expect(wrapper.state('submitted')).toEqual(false);
+       expect(mockFetchDataFunction).not.toHaveBeenCalled();
+
+       wrapper.find('Button').simulate(
+        'click', 
+        {preventDefault() {}}
+      );
+      expect(wrapper.instance().validate()).toBe(false); 
+      expect(wrapper.state('errString')).toBe("Select occupancy value from drop down.");
+      expect(wrapper.state('submitted')).toEqual(false);
+      expect(mockFetchDataFunction).not.toHaveBeenCalled();
    })
 
 });
 
-
-
-/*
-
-  it('test button click state change', () => {
-    const onSubmitFn = jest.fn();
-    const wrapper = mount(  
-      <Provider store={store}>
-      <InputForm onSubmit={onSubmitFn}/>
-      </Provider>
-    );
-    const form = wrapper.find('form').first();
-    form.simulate('submit');
-    //console.log(form.debug())
-    expect(onSubmitFn).toHaveBeenCalledTimes(1);
-
-    //expect(Object.keys(wrapper.state('submitted'))).toBe(false);
-  });
-  it('test filling form', () => {
-    const wrapper = mount(  
-      <Provider store={store}>
-        <InputForm store={store}/>
-      </Provider>
-    );
-    const formPropsFromReduxForm = wrapper.find(InputForm).props(); // enzyme
-    expect(
-        formPropsFromReduxForm
-      ).to.be.deep.equal({
-        search: {}, 
-        submitted: false, 
-        loanErr: false, 
-        propertyErr: false,
-        creditErr: false,
-        occupancyErr: false,
-        errString: ""   
-      });
-
-
-    //wrapper.find('form').simulate('click'); // click submit on empty form.
-    //wrapper.instance().validate().toBe(false);
-    //const result = InputForm.prototype.validate.call();
-    //expect(result).toBe(false);
-
-    //expect(wrapper.find(InputForm).dive().state('loanErr')).toEqual(true);
-    //.state('addNewOnSubmit')).toEqual(true)
-    console.log(wrapper.debug());
-
-    console.log(wrapper.dive().debug());
-    //instance = wrapper.instance();
-    //instance.vertify()
-    //expect(instance.verifyInputs(state)).toBe(false);
-
-    //const event = { target: { value: "59244" } };
-    //wrapper.find("input").first().simulate("change", event);
-    
-    //expect(wrapper.find.props('search')).toBe("59244");
-
-  })
-
-
-describe('Testing Input.js', () => {
-    let store;
-    let component;
-   
-    beforeEach(() => {
-      store = mockStore({
-        items: [],
-        hasErrored: false,
-        isLoading: false,
-      });
-
-      component = renderer.create(
-        <Provider store={store}>
-          <Input />
-        </Provider>
-      );
-  
-   
-    it('snapshot test', () => {
-      expect(component.toJSON()).toMatchSnapshot();
-    });
-    it('renders form', () => {
-        const loan = <label>Loan Size</label>;
-        const credit = <label>Property Type</label>;
-        const property = <label>Credit Score</label>;
-        const occupancy = <label>Occupancy</label>;
-        expect(component.contains(loan));
-        expect(component.contains(credit));
-        expect(component.contains(property));
-        expect(component.contains(occupancy));
-        expect(component.find("button").prop("type")).toBe("submit");
-    });
-  });
-});
-
-
-
-
-
-
-
-store.dispatch = jest.fn();
- 
-component = renderer.create(
-  <Provider store={store}>
-    <App />
-  </Provider>
-);
-});
-
-it('check to see number of drop downs', () => {
-const test = component.find('form').length;
-expect(test).toEqual(1); // or the number of occurrence you're expecting
-});
-
-it('should dispatch an action on button click', () => {
-renderer.act(() => {
-  component.root.findByType('button').props.onClick();
-});
-
-renderer.act(() => {
-  component.root.findByType('input')
-    .props.onChange({ target: { value: '600' } });
-});
-
-expect(store.dispatch).toHaveBeenCalledTimes(1);
-expect(store.dispatch).toHaveBeenCalledWith(
-  myAction({ payload: 'some other text' })
-);
-});
-*/
