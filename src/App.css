@@ -29,7 +29,6 @@ form {
   margin-top: 5vh;
 }
 .error {
-  border:1px solid #ff0000!important;
   border-radius: .25rem;
 }
 

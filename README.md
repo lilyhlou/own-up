@@ -14,10 +14,10 @@ This project was created for [Own Up](ownup.com)'s coding challenge. The goal wa
 * [Jest](https://jestjs.io/), [React Test Renderer](https://reactjs.org/docs/test-renderer.html) and [Enzyme](https://enzymejs.github.io/enzyme/)for testing 
 
 ### How to Run
-##### Downloading and opening the code
+##### Downloading and running the code
 1. Open terminal and run `git clone https://github.com/lilyhlou/own-up.git` or open with Github Desktop/download a zip file of the code.
 2. `cd` to open folder (own-up)
-3. Run `npm install` to download dependencies (make sure [npm and Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) are installed)
+3. Run `npm install` to download dependencies (make sure [npm and Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) are also installed)
 4. Create a .env file in the root (same level as .env.schema) and add the line "REACT_APP_API_KEY= YOUR_API_KEY" (replace 'YOUR_API_KEY' with your API key)
 5. Run `npm start` in terminal
 6. Plug in values in text boxes (all fields must be filled to render successfully; values for credit score must be between 300 and 800 and cannot contain non-zero decimals). Click 'Quote Rates' to see a returned table of rates and lenders.
@@ -27,9 +27,9 @@ This project was created for [Own Up](ownup.com)'s coding challenge. The goal wa
 Open [http://localhost:3000](http://localhost:3000) in you browser. The page will reload if you make edits (note: terminate app with "control + c" and run `npm start` again if API key is updated in .env file).
 Press option + command + c and click the console tab of inspector to see errors or to inspect code.
 
-* `npm test` + press 'a' and hit enter to run tests.
+* `npm test` (+ press 'a' if necessary) to run all tests. (Do this at step 5 of the above in place of `npm start`)
 
-* `npm run build` builds the app for production / deployment.
+* `npm run build` builds the app for production / deployment. (Do this at step 5 of the above in place of `npm start`)
 
  #### Tests
  * `App.test.js`: snapshot test of App.js and test for App.js rendering without crashing

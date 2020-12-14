@@ -9,18 +9,18 @@ export class RateTable extends Component {
             return <p></p>;
         }
         if (this.props.hasErrored) { // error from API 
-            return 	<Row>
-                        <Col>
-                            <Alert variant="danger" className='d-block'>
-                                Sorry, there was an error loading the items. Try refreshing and submitting again.
-                            </Alert>
-                        </Col>
-                    </Row>
+            return  <Col>
+                        <Alert variant="danger" className='error d-block'>
+                            Sorry, there was an error loading the items. Try refreshing and submitting again.
+                        </Alert>
+                    </Col>
         }
         if(this.props.submitted && this.props.items.length === 0) { // api returned no results in items list
-            return <Alert variant="warning">
-                        No results found.  
-                    </Alert>
+            return <Col>
+                        <Alert variant="warning" className="error d-block">
+                            No results found. 
+                        </Alert>
+                    </Col>
         }
 
         return (
