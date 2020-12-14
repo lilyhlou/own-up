@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Table, Alert, Row, Col } from 'react-bootstrap';
+import { Table, Alert, Col } from 'react-bootstrap';
 
 export class RateTable extends Component {
     render() {
