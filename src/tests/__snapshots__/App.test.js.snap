@@ -4,6 +4,120 @@ exports[`App.js snapshot test should render with given state from Redux store 1`
 <div
   className="App"
 >
+  <nav
+    className="color-nav navbar navbar-expand-lg navbar-light"
+  >
+    <span
+      className="navbar-brand"
+    >
+      <img
+        alt="Own Up"
+        className="d-inline-block align-top"
+        src="ownup-logo.svg"
+        width="200"
+      />
+    </span>
+    <button
+      aria-controls="basic-navbar-nav"
+      aria-label="Toggle navigation"
+      className="navbar-toggler collapsed"
+      onClick={[Function]}
+      type="button"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      aria-expanded={null}
+      className="navbar-collapse collapse"
+      id="basic-navbar-nav"
+    >
+      <div
+        className="ml-auto navbar-nav"
+        onKeyDown={[Function]}
+      >
+        <p>
+          <a
+            className="nav-link"
+            data-rb-event-key="https://www.ownup.com/about/"
+            href="https://www.ownup.com/about/"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+          >
+            About
+          </a>
+        </p>
+        <p>
+          <a
+            className="nav-link"
+            data-rb-event-key="https://www.ownup.com/how-it-works/"
+            href="https://www.ownup.com/how-it-works/"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+          >
+            How It Works
+          </a>
+        </p>
+        <p>
+          <a
+            className="nav-link"
+            data-rb-event-key="https://resources.ownup.com/"
+            href="https://resources.ownup.com/"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+          >
+            Resources
+          </a>
+        </p>
+        <p>
+          <a
+            className="nav-link"
+            data-rb-event-key="https://www.ownup.com/reviews/"
+            href="https://www.ownup.com/reviews/"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+          >
+            Reviews
+          </a>
+        </p>
+        <p>
+          <a
+            className="nav-link"
+            data-rb-event-key="https://www.ownup.com/faq/"
+            href="https://www.ownup.com/faq/"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+          >
+            FAQs
+          </a>
+        </p>
+        <p>
+          <a
+            className="nav-link"
+            data-rb-event-key="https://discover.ownup.com/get-started"
+            href="https://discover.ownup.com/get-started"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+          >
+            Get Started
+          </a>
+        </p>
+      </div>
+    </div>
+  </nav>
+  <h1
+    id="title"
+  >
+    <span>
+      Rate Quote Calculator
+    </span>
+  </h1>
+  <p
+    id="description"
+  >
+    At Own Up we’re always looking to help our customers save money on their mortgage. As such, we want to make sure we’re looking at quotes from multiple local lenders to find the best rate. This calculator helps you compare and calculate mortgage product rate quotes from our lender network. Just fill out the form below to get started.
+  </p>
   <div
     className="container-fluid"
   >

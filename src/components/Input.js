@@ -69,14 +69,14 @@ export class InputForm extends Component {
 		}
 		return valid;
 	}
-	  submit(e) {
-		  e.preventDefault();
-		  if(this.validate()) { // ensure that data entered is within bounds
+	submit(e) {
+		e.preventDefault();
+		if(this.validate()) { // ensure that data entered is within bounds
 			this.setState({submitted: true});
 			this.props.fetchData(`https://ss6b2ke2ca.execute-api.us-east-1.amazonaws.com/Prod/quotes?loanSize=${this.state.search["loan"]}&creditScore=${this.state.search["credit"]}&propertyType=${this.state.search["property"]}&occupancy=${this.state.search["occupancy"]}`);
 		} 
 	  }  
-	  update = (e) => { // when user types or changes selection in form 
+	update = (e) => { // when user types or changes selection in form 
 		let search = this.state.search;
 		search[e.target.name] = e.target.value;        
 		this.setState({search});
@@ -87,49 +87,46 @@ export class InputForm extends Component {
 				<Form id="forMedScreen">
 					<Form.Row>
 						<Form.Group as={Col} lg="2"md="2" className="d-flex justify-content-end">     
-									<Form.Label>Loan Size</Form.Label>
+							<Form.Label>Loan Size</Form.Label>
 						</Form.Group>
 						<Form.Group as={Col} lg="4" md="4" className="d-flex justify-content-start">     
-									<InputGroup className={"formBox mb-3" + (this.state.loanErr ? ' error' : ' noerror')}>
-										<InputGroup.Prepend>
-											<InputGroup.Text>$</InputGroup.Text>
-										</InputGroup.Prepend>
-										<FormControl type="number" min="300" placeholder="450,000" size="md" name="loan" onChange={(e) => this.update(e)}/>
-									</InputGroup>
+							<InputGroup className={"formBox mb-3" + (this.state.loanErr ? ' error' : ' noerror')}>
+								<InputGroup.Prepend>
+									<InputGroup.Text>$</InputGroup.Text>
+								</InputGroup.Prepend>
+								<FormControl type="number" min="300" placeholder="450,000" size="md" name="loan" onChange={(e) => this.update(e)}/>
+							</InputGroup>
 						</Form.Group>
 						<Form.Group as={Col} lg="2" md="2" className="d-flex justify-content-end"> 
-								<Form.Label>Property Type</Form.Label>
-								</Form.Group>
-								<Form.Group as={Col} lg="4" md="4" className="d-flex justify-content-start"> 
-
-								<Form.Control as="select" defaultValue={'DEFAULT'} size="md" name="property" className={"formBox" + (this.state.propertyErr ? ' error' : ' noerror')} onChange={(e) => this.update(e)}>
-									<option value="DEFAULT" disabled hidden>Select Option</option>
-									<option value="SingleFamily">Single Family</option>
-									<option value="Condo">Condo</option>
-									<option value="Townhouse">Townhouse</option>
-									<option value="MultiFamily">Multi-Family</option>
-								</Form.Control>
+							<Form.Label>Property Type</Form.Label>
+						</Form.Group>
+						<Form.Group as={Col} lg="4" md="4" className="d-flex justify-content-start"> 
+							<Form.Control as="select" defaultValue={'DEFAULT'} size="md" name="property" className={"formBox" + (this.state.propertyErr ? ' error' : ' noerror')} onChange={(e) => this.update(e)}>
+								<option value="DEFAULT" disabled hidden>Select Option</option>
+								<option value="SingleFamily">Single Family</option>
+								<option value="Condo">Condo</option>
+								<option value="Townhouse">Townhouse</option>
+								<option value="MultiFamily">Multi-Family</option>
+							</Form.Control>
 						</Form.Group>
 					</Form.Row>
 					<Form.Row>
 						<Form.Group as={Col} md="2" className="d-flex justify-content-end">
-
-								<Form.Label>Credit Score</Form.Label>
-								</Form.Group>
-								<Form.Group as={Col} lg="4" md="4" className="d-flex justify-content-start">
-
-								<FormControl type="number" min="300" max="800" placeholder="300-800" size="md" name="credit" className={"formBox" + (this.state.creditErr ? ' error' : ' noerror')} onChange={(e) => this.update(e)}/>
+							<Form.Label>Credit Score</Form.Label>
+						</Form.Group>
+						<Form.Group as={Col} lg="4" md="4" className="d-flex justify-content-start">
+							<FormControl type="number" min="300" max="800" placeholder="300-800" size="md" name="credit" className={"formBox" + (this.state.creditErr ? ' error' : ' noerror')} onChange={(e) => this.update(e)}/>
 						</Form.Group>
 						<Form.Group as={Col} lg="2" md="2" className="d-flex justify-content-end">
 								<Form.Label>Occupancy</Form.Label>
-							</Form.Group>
-							<Form.Group as={Col} md="4" className="d-flex justify-content-start">
-								<Form.Control as="select" size="md" name="occupancy" className={"formBox" + (this.state.occupancyErr ? ' error' : ' noerror')} defaultValue={'DEFAULT'} onChange={(e) => this.update(e)}>
-									<option value="DEFAULT" disabled hidden>Select Option</option>
-									<option value="Primary">Primary Residence</option>
-									<option value="Secondary">Secondary Residence</option>
-									<option value="Investment">Investment</option>
-								</Form.Control>
+						</Form.Group>
+						<Form.Group as={Col} md="4" className="d-flex justify-content-start">
+							<Form.Control as="select" size="md" name="occupancy" className={"formBox" + (this.state.occupancyErr ? ' error' : ' noerror')} defaultValue={'DEFAULT'} onChange={(e) => this.update(e)}>
+								<option value="DEFAULT" disabled hidden>Select Option</option>
+								<option value="Primary">Primary Residence</option>
+								<option value="Secondary">Secondary Residence</option>
+								<option value="Investment">Investment</option>
+							</Form.Control>
 						</Form.Group>
 					</Form.Row>
 					<Form.Row>
@@ -139,8 +136,7 @@ export class InputForm extends Component {
 							<Button
 								type="submit"
 								className="blackBackground"
-								onClick={this.submit}
-							>
+								onClick={this.submit}>
 								{this.props.isLoading ? 'Loading…' : 'Quote Rates'}
 							</Button>
 						</Form.Group>
@@ -154,8 +150,7 @@ export class InputForm extends Component {
 					</Col>
 				</Row >
 				<Row className="d-flex">
-					<RateTable submitted={this.state.submitted}>
-					</RateTable>
+					<RateTable submitted={this.state.submitted}></RateTable>
 				</Row>
 		</Container>
 		);

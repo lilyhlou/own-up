@@ -30,7 +30,7 @@ export function itemsFetchData(url) {
             headers: new Headers({
               'Authorization': 'OU-AUTH ' + process.env.REACT_APP_API_KEY
             })
-          })
+        })
             .then((response) => {
                 if (!response.ok) {
                     console.log(response);

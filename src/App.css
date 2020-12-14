@@ -3,17 +3,9 @@
 }
 
 /* for input form */
-.input {
-  display: flex;
-  white-space:nowrap
-}
 .formBox {
   margin-left: 2rem; 
   margin-right: 4rem; 
-}
-.dropdown-menu{
-  width: 100%;
-  text-align: center;
 }
 form {
   margin-top: 10vh;
@@ -21,16 +13,15 @@ form {
 .button {
   padding-right: 4.5rem!important;
 }
-
 .button, .btn {
   margin-right: 0rem;
   text-align: right;
-
 }
 .blackBackground { /* for find rates button */
   background-color:#143f3d!important;
   border-color: #143f3d!important;
 }
+
 /* alerts */
 .alert {
   width: 80%!important;
@@ -41,6 +32,7 @@ form {
   border:1px solid #ff0000!important;
   border-radius: .25rem;
 }
+
 /* for table */
 .table {
   border: 1px solid rgb(201, 201, 201);
@@ -57,7 +49,8 @@ tbody tr td {
 
 /* heading and description */
 #description {
-  padding: 3% 5%;
+  padding: 2% 5%;
+  font-style: italic;
 }
 #title {
   padding-top: 5vh;

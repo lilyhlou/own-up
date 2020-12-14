@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow, configure, mount, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import { RateTable } from "../components/Table";
 import { Provider } from 'react-redux';
 import "./setupTests"
@@ -19,6 +19,7 @@ describe('Testing Table.js', () => {
       itemsIsLoading: false,
     });
   });
+
   it('snapshot test', () => {
     component = renderer.create(
       <Provider store={store}>
@@ -35,7 +36,7 @@ describe('Testing Table.js', () => {
   describe('Unit testing for Table.js', () => {
     let wrapper;
 
-    it('tests to render table thats still loading', () => {
+    it('render table thats still loading', () => {
       wrapper = shallow(
         <RateTable   
           items={[]}
@@ -46,7 +47,8 @@ describe('Testing Table.js', () => {
       );
       expect(wrapper.contains(<p></p>)).toBe(true);  
     });
-    it('tests to render table thats errored', () => {
+
+    it('render error message', () => {
       wrapper = shallow(
         <RateTable   
           items={[]}
@@ -57,7 +59,7 @@ describe('Testing Table.js', () => {
       );
       expect(wrapper.text()).toEqual('Sorry, there was an error loading the items. Try refreshing and submitting again.');
   });
-    it('tests to render table with no info', () => {
+    it('render table with no info', () => {
       wrapper = shallow(
         <RateTable   
           items={[]}
@@ -65,24 +67,26 @@ describe('Testing Table.js', () => {
           isLoading={false}
           submitted={true}
         />
-        );
+      );
       expect(wrapper.text()).toEqual('No results found.');
     });
-    it('tests to render table and check for concat methods', () => {
+
+    it('render table with rates and check for concat methods', () => {
       wrapper = shallow(
-      <RateTable   
-        items={[{
-          "lenderName": "TFB Federal Credit Union",
-          "loanType": "30YR Fixed",
-          "interestRate": 4.125,
-          "closingCosts": 10000,
-          "monthlyPayment": 1000,
-          "apr": 4.25
-        }]}
-        hasErrored={false}
-        isLoading={false}
-        submitted={true}
-      />);
+        <RateTable   
+          items={[{
+            "lenderName": "TFB Federal Credit Union",
+            "loanType": "30YR Fixed",
+            "interestRate": 4.125,
+            "closingCosts": 10000,
+            "monthlyPayment": 1000,
+            "apr": 4.25
+          }]}
+          hasErrored={false}
+          isLoading={false}
+          submitted={true}
+        />
+      );
       // to test string concat and fixed number of decimals and display data
       expect(wrapper.text()).toMatch(/TFB Federal C.../); 
       expect(wrapper.text()).toMatch(/4.125%/); 
