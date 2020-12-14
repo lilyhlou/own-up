@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 
-class InputForm extends Component {
+export class InputForm extends Component {
 	constructor (props) {
 		super(props);
 		this.state = { 
@@ -41,8 +41,8 @@ class InputForm extends Component {
 		} else {
 			this.setState({propertyErr: false});
 		}
-
-		if(isNaN(parseInt(search["credit"])) || search["credit"] < 300 || search["credit"] > 800 || search["credit"] === "") { // check if int (parseInt turns string into int if int, to NaN if unable to parse) 
+		// search["credit"] % 1 is 0 if int  
+		if((search["credit"] % 1 !== 0) || search["credit"] < 300 || search["credit"] > 800 || search["credit"] === "") { // check if int (parseInt turns string into int if int, to NaN if unable to parse) 
 			valid = false;
 			this.setState({creditErr: true});
 		  	if(search["credit"] < 300 || search["credit"] > 800 ) { // check if credit is between 300 and 800

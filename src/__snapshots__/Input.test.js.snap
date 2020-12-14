@@ -1,0 +1,204 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Input.js snapshot test 1`] = `
+<div
+  className="container-fluid"
+>
+  <form
+    className=""
+    id="forMedScreen"
+  >
+    <div
+      className="form-row"
+    >
+      <div
+        className="d-flex justify-content-end form-group col-lg-2 col-md-2"
+      >
+        <label
+          className="form-label"
+        >
+          Loan Size
+        </label>
+      </div>
+      <div
+        className="d-flex justify-content-start form-group col-lg-4 col-md-4"
+      >
+        <div
+          className="formBox mb-3 noerror input-group"
+        >
+          <div
+            className="input-group-prepend"
+          >
+            <span
+              className="input-group-text"
+            >
+              $
+            </span>
+          </div>
+          <input
+            className="form-control form-control-md"
+            min="300"
+            name="loan"
+            onChange={[Function]}
+            placeholder="450,000"
+            type="number"
+          />
+        </div>
+      </div>
+      <div
+        className="d-flex justify-content-end form-group col-lg-2 col-md-2"
+      >
+        <label
+          className="form-label"
+        >
+          Property Type
+        </label>
+      </div>
+      <div
+        className="d-flex justify-content-start form-group col-lg-4 col-md-4"
+      >
+        <select
+          className="formBox noerror form-control form-control-md"
+          defaultValue="DEFAULT"
+          name="property"
+          onChange={[Function]}
+        >
+          <option
+            disabled={true}
+            hidden={true}
+            value="DEFAULT"
+          >
+            Select Option
+          </option>
+          <option
+            value="SingleFamily"
+          >
+            Single Family
+          </option>
+          <option
+            value="Condo"
+          >
+            Condo
+          </option>
+          <option
+            value="Townhouse"
+          >
+            Townhouse
+          </option>
+          <option
+            value="MultiFamily"
+          >
+            Multi-Family
+          </option>
+        </select>
+      </div>
+    </div>
+    <div
+      className="form-row"
+    >
+      <div
+        className="d-flex justify-content-end form-group col-md-2"
+      >
+        <label
+          className="form-label"
+        >
+          Credit Score
+        </label>
+      </div>
+      <div
+        className="d-flex justify-content-start form-group col-lg-4 col-md-4"
+      >
+        <input
+          className="formBox noerror form-control form-control-md"
+          max="800"
+          min="300"
+          name="credit"
+          onChange={[Function]}
+          placeholder="300-800"
+          type="number"
+        />
+      </div>
+      <div
+        className="d-flex justify-content-end form-group col-lg-2 col-md-2"
+      >
+        <label
+          className="form-label"
+        >
+          Occupancy
+        </label>
+      </div>
+      <div
+        className="d-flex justify-content-start form-group col-md-4"
+      >
+        <select
+          className="formBox noerror form-control form-control-md"
+          defaultValue="DEFAULT"
+          name="occupancy"
+          onChange={[Function]}
+        >
+          <option
+            disabled={true}
+            hidden={true}
+            value="DEFAULT"
+          >
+            Select Option
+          </option>
+          <option
+            value="Primary"
+          >
+            Primary Residence
+          </option>
+          <option
+            value="Secondary"
+          >
+            Secondary Residence
+          </option>
+          <option
+            value="Investment"
+          >
+            Investment
+          </option>
+        </select>
+      </div>
+    </div>
+    <div
+      className="form-row"
+    >
+      <div
+        className="justify-content-start form-group col-lg-8 col-md-8"
+      />
+      <div
+        className="justify-content-start button form-group col-lg-4 col-md-4"
+      >
+        <button
+          className="blackBackground btn btn-primary"
+          disabled={false}
+          onClick={[Function]}
+          type="submit"
+        >
+          Quote Rates
+        </button>
+      </div>
+    </div>
+  </form>
+  <div
+    className="row"
+  >
+    <div
+      className="col"
+    >
+      <div
+        className="fade d-none alert alert-danger show"
+        role="alert"
+      >
+        
+      </div>
+    </div>
+  </div>
+  <div
+    className="d-flex row"
+  >
+    <p />
+  </div>
+</div>
+`;

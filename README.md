@@ -31,4 +31,8 @@ Press option + command + c and click the console tab of inspector to see errors 
 
 * `npm run build` builds the app for production / deployment.
 
- 
+ #### Tests
+ * App.test.js: snapshot test of App.js and test for App.js rendering without crashing
+ * Input.test.js: snapshot test of input screen, checking validate methods 
+ * Form.test.js: snapshot test of table, returns nothing when not submitted
+ * test for reducers 
