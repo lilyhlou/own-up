@@ -55,8 +55,19 @@ tbody tr td {
   color: #143f3d;
 }
 
-
-
+/* heading and description */
+#description {
+  padding: 3% 5%;
+}
+#title {
+  padding-top: 5vh;
+  padding-bottom: 0vh;
+}
+h1#title > span {
+  font-family: Times New Roman, serif;
+  font-weight: 900;
+  background-color: rgb(143, 244, 189);
+}
 /* css for increased responsiveness on smaller screens */
 
 @media (max-width: 768px) {

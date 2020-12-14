@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow, configure, mount, render } from 'enzyme';
-import { InputForm } from "./components/Input";
+import { InputForm } from "../components/Input";
 import { Provider } from 'react-redux';
 import "./setupTests";
 import renderer from 'react-test-renderer';

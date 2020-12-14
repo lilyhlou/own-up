@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow, configure, mount, render } from 'enzyme';
-import { RateTable } from "./components/Table";
+import { RateTable } from "../components/Table";
 import { Provider } from 'react-redux';
 import "./setupTests"
 import renderer from 'react-test-renderer';
